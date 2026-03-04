@@ -28,6 +28,20 @@ export function useAuth () {
     }
   }
 
+  const register = async (username: string, password: string): Promise<boolean> => {
+    try {
+      await api.post('/auth/register', {
+        password,
+        username,
+      })
+
+      return true
+    } catch (error) {
+      console.error('Register error:', error)
+      return false
+    }
+  }
+
   const logout = () => {
     accessToken.value = null
     refreshToken.value = null
@@ -42,6 +56,7 @@ export function useAuth () {
     accessToken,
     isLoggedIn,
     login,
+    register,
     logout,
     refreshToken,
   }
