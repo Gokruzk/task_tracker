@@ -8,6 +8,7 @@ from apps.task.serializers.task import TaskSerializer
 from apps.task.views.filters import TaskFilter
 
 class TaskPagination(PageNumberPagination):
+    # e.g. ?page=2&page_size=10
     page_size = 5
     page_size_query_param = "page_size"  # e.g. ?page_size=20
     max_page_size = 50
