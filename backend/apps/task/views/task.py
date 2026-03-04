@@ -5,7 +5,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 
 from apps.task.models import Task
 from apps.task.views.filters import TaskFilter
-from apps.task.serializers.task import TaskSerializer
+from apps.task.serializers.task import TaskReadSerializer, TaskSerializer
 from apps.core.ResponseManager import ResponsesManager
 
 
@@ -22,6 +22,15 @@ class TaskViewSet(viewsets.ModelViewSet):
     filterset_class = TaskFilter
     pagination_class = TaskPagination
 
+    def get_serializer_class(self):
+        """
+        - list y retrieve: TaskReadSerializer
+        - create, update, etc: TaskSerializer
+        """
+        if self.action in ["list", "retrieve"]:
+            return TaskReadSerializer
+        return self.serializer_class
+    
     def get_queryset(self):
         qs = Task.objects.select_related("status").order_by("-created_at")
         if not self.request.user.is_staff:
