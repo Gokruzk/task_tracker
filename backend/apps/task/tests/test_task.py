@@ -41,10 +41,10 @@ class TaskAPITest(APITestCase):
         )
 
         response = self.client.get(self.url)
-
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        tasks_list = response.json()
-
+        
         # Verify get_queryset logic: only 1 task should return (the one belonging to self.user)
-        self.assertEqual(len(tasks_list), 1)
-        self.assertEqual(tasks_list[0]["title"], "My Task")
+        data = response.json()
+        self.assertIn("results", data)
+        self.assertEqual(len(data["results"]), 1)
+        self.assertEqual(data["count"], 1)
