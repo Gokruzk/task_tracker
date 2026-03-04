@@ -22,8 +22,8 @@ from rest_framework_simplejwt.views import (
 )
 
 apps_patterns = [
-    path("users", include("apps.users.urls", namespace="")),
-    path("task", include("apps.task.urls", namespace="")),
+    path("api/", include("apps.users.urls", namespace="")),
+    path("api/", include("apps.task.urls.task", namespace="")),
 ]
 
 urlpatterns = [
