@@ -14,7 +14,12 @@ class TaskViewSet(viewsets.ModelViewSet):
     filterset_class = TaskFilter
 
     def get_queryset(self):
-        return Task.objects.filter(user=self.request.user)
+        qs = Task.objects.select_related("status")
+
+        if self.request.user.is_staff:
+            return qs.order_by("-created_at")
+
+        return qs.filter(user=self.request.user).order_by("-created_at")
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
