@@ -1,0 +1,51 @@
+services:
+  # --- BASE DE DATOS ---
+  db:
+    container_name: task_db
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_USER: ${DB_USER}
+    image: postgres:16-alpine
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  # --- BACKEND (Django) ---
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    command: python manage.py runserver 0.0.0.0:8000
+    container_name: task_backend
+    depends_on:
+      - db
+    environment:
+      DATABASE_DB_HOST: db
+      DATABASE_DB_NAME: ${DB_NAME}
+      DATABASE_DB_PORT: 5432
+      DATABASE_DB_PSW: ${DB_PASSWORD}
+      DATABASE_DB_USER: ${DB_USER}
+      DEBUG: ${DJANGO_DEBUG}
+      SECRET_KEY: ${DJANGO_SECRET_KEY}
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+
+  # --- FRONTEND (Vue + Nginx) ---
+  frontend:
+    build:
+      args:
+
+        - VITE_API_BASE_URL=http://localhost:8000/api
+      context: ./frontend
+    container_name: task_frontend
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+
+volumes:
+  postgres_data:

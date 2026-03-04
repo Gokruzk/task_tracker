@@ -17,23 +17,23 @@ class ServerConfig:
 class DBConfig:
     @staticmethod
     def name() -> str:
-        return getenv("DB_NAME")
+        return getenv("DATABASE_DB_NAME") or getenv("DB_NAME")
 
     @staticmethod
     def user() -> str:
-        return getenv("DB_USER")
+        return getenv("DATABASE_DB_USER") or getenv("DB_USER")
 
     @staticmethod
     def psw() -> str:
-        return getenv("DB_PSW")
+        return getenv("DATABASE_DB_PSW") or getenv("DB_PSW")
 
     @staticmethod
     def port() -> str:
-        return getenv("DB_PORT")
+        return getenv("DATABASE_DB_PORT") or "5432"
 
     @staticmethod
     def host() -> str:
-        return getenv("DB_HOST")
+        return getenv("DATABASE_DB_HOST") or "db"
 
 
 class JWTConfig:

@@ -59,7 +59,7 @@
 <script setup lang="ts">
   import { nextTick, ref, watch } from 'vue'
   import { useNotification } from '@/composables/useNotifications'
-  import { useLoginService } from './loginService'
+  import { useLoginService } from './LoginService'
 
   // 1. Estado local
   const username = ref('')
