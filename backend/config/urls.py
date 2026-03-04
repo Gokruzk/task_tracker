@@ -21,7 +21,10 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 
+from apps.users.views import RegisterView
+
 apps_patterns = [
+    path("auth/register", RegisterView.as_view(), name="register"),
     path("", include("apps.users.urls", namespace="")),
     path("", include("apps.task.urls.task", namespace="")),
     path("", include("apps.task.urls.status", namespace="")),
