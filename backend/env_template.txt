@@ -1,0 +1,9 @@
+SECRET_KEY = "django-insecure-!stxauk##t^imdet!nex6+55#gws!vil=#__y3n$hspt!vmh5r"
+DB_NAME = "task_manager"
+DB_USER = ""
+DB_PSW = ""
+DB_HOST = "localhost"
+DB_PORT = "5432"
+ALGORITHM=HS256
+ACCESS_TOKEN_EXPIRE_MINUTES=120
+ENVIRONMENT=development
