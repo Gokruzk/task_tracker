@@ -2,6 +2,8 @@
 DB_NAME=
 DB_USER=
 DB_PASSWORD=
+# use db because is the name of container service
+DB_HOST=db
 
 # Django
 DJANGO_SECRET_KEY=""

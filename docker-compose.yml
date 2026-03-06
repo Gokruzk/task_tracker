@@ -23,7 +23,7 @@ services:
     depends_on:
       - db
     environment:
-      DATABASE_DB_HOST: db
+      DATABASE_DB_HOST: ${DB_HOST}
       DATABASE_DB_NAME: ${DB_NAME}
       DATABASE_DB_PORT: 5432
       DATABASE_DB_PSW: ${DB_PASSWORD}
