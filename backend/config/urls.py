@@ -25,6 +25,8 @@ from apps.users.views import RegisterView
 
 apps_patterns = [
     path("auth/register", RegisterView.as_view(), name="register"),
+    path("auth/login", TokenObtainPairView.as_view(), name="token_obtain_pair"),
+    path("auth/login/refresh", TokenRefreshView.as_view(), name="token_refresh"),
     path("", include("apps.users.urls", namespace="")),
     path("", include("apps.task.urls.task", namespace="")),
     path("", include("apps.task.urls.status", namespace="")),
@@ -32,7 +34,5 @@ apps_patterns = [
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("api/auth/login", TokenObtainPairView.as_view(), name="token_obtain_pair"),
-    path("api/auth/login/refresh", TokenRefreshView.as_view(), name="token_refresh"),
     path("api/", include(apps_patterns), name="api"),
 ]
