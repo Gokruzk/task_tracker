@@ -34,7 +34,12 @@ The system is designed with scalability and security in mind:
     cd task-tracker
     ```
 
-2.  Create a `.env` files based en .env_template.txt 
+2.  Create a `.env` files based on:
+    ```bash
+    ./env_template.txt
+    frontend/env_template.txt
+    backend/env_template.txt
+    ```
     > **Note for DevOps:** If your `SECRET_KEY` contains `$` symbols, you **must** escape them with `$$` to prevent Docker Compose interpolation errors.
     > 
 ---
